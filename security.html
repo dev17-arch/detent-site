@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Detent Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..700&family=Funnel+Sans:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<style>
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar__in wrap">
+    <a class="mark" href="./" aria-label="Detent home">
+      <svg class="mark__knob" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><line x1="10" y1="3.6" x2="10" y2="7.4"/></svg>
+      <span>detent</span>
+    </a>
+    <a class="link" style="margin-left:auto" href="./">Back to Detent</a>
+  </div>
+</header>
+
+<main class="doc band--paper">
+  <div class="wrap">
+    <h1>Security</h1>
+    <p class="stamp">Last updated 23 October 2026</p>
+    <p>Detent exists so a person, not software, approves what AI agents do. That only works if software cannot fake the person. Here is how Detent is built for that, and how to report a problem.</p>
+
+    <h2>Approvals software can't forge</h2>
+    <ul>
+      <li>Every Detent makes its own secret key and signs each answer it gives: who, which request, what was on its screen, the decision, and a counter that only goes up.</li>
+      <li>Your company's Detent server checks the signature, the device and the counter. Unsigned, forged, replayed or revoked approvals are refused when your company turns on "Only signed approvals count".</li>
+      <li>Pairing shows the device's key as a code on its own screen, never on the computer. Pairing again replaces the key. A lost device can be revoked in one click.</li>
+      <li>High-risk actions need a full turn of the knob and a press within five seconds, after a short pause so a reflex press is ignored.</li>
+    </ul>
+
+    <h2>Your data</h2>
+    <ul>
+      <li>The bridge removes common secrets (API keys, tokens, passwords, private keys) before anything is shown, recorded or sent. Companies can choose to record control names only.</li>
+      <li>The bridge accepts connections only from your own computer and rejects requests from web pages on other sites.</li>
+      <li>Companies can run the Detent server inside their own network, so records never leave it.</li>
+      <li>On the server: approval records are chained with SHA-256 so any change or deletion is detectable; device keys are encrypted with a separate key; passwords use PBKDF2 with 310,000 iterations; every token is stored only as a hash; sign-in, enrolment and approval checks are rate limited; cookies are HttpOnly and SameSite=Strict; pages send a strict Content Security Policy.</li>
+      <li>Admin actions (pairings, revocations, settings, rollouts) are recorded in an activity log.</li>
+    </ul>
+
+    <h2>Hardware</h2>
+    <p>Production devices will ship with encrypted flash, secure boot (only Detent-signed firmware runs) and debug ports disabled, so the key can't be read out of a stolen device. Prototype units used in pilots do not have these protections yet; pilot customers are told this in writing.</p>
+
+    <h2>What we don't claim</h2>
+    <p>Detent has not yet completed an independent audit such as SOC 2 or ISO 27001, or an external penetration test. We will publish when we have. Detent recognises common risky actions and your company's rules; it cannot recognise every risky action an agent might take.</p>
+
+    <h2>Report a vulnerability</h2>
+    <p>Email <a href="mailto:devvratpathak.dp@gmail.com?subject=Security">devvratpathak.dp@gmail.com</a> with "Security" in the subject. Please include steps to reproduce. We will reply within three working days, keep you updated, and credit you if you wish. Please give us reasonable time to fix an issue before publishing it, don't access data that isn't yours, and don't disrupt anyone's service. We won't take legal action against good-faith research that follows these rules.</p>
+  </div>
+</main>
+
+<footer class="foot band band--ink">
+  <div class="wrap foot__in">
+    <p>Designed in Dubai.</p>
+    <nav class="foot__nav" aria-label="Footer">
+      <a href="./">Detent</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="security.html">Security</a>
+      <a href="warranty.html">Warranty</a>
+    </nav>
+    <p class="foot__copy">© 2026 Detent</p>
+  </div>
+</footer>
+</body>
+</html>

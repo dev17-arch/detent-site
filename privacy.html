@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Detent Privacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..700&family=Funnel+Sans:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<style>
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar__in wrap">
+    <a class="mark" href="./" aria-label="Detent home">
+      <svg class="mark__knob" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><line x1="10" y1="3.6" x2="10" y2="7.4"/></svg>
+      <span>detent</span>
+    </a>
+    <a class="link" style="margin-left:auto" href="./">Back to Detent</a>
+  </div>
+</header>
+
+<main class="doc band--paper">
+  <div class="wrap">
+    <h1>Privacy</h1>
+    <p class="stamp">Last updated 23 October 2026</p>
+    <p>Detent collects as little as it can. This page covers the website and waitlist, the Detent bridge and device, and Detent for Teams, the company version.</p>
+
+    <h2>The website and waitlist</h2>
+    <ul>
+      <li>We keep the email address you type in, your answers to the two optional questions (which agents you use and how many you run at once), and the date you joined.</li>
+      <li>No tracking pixels, no advertising cookies, no analytics.</li>
+      <li>We email you when Detent can be bought and, now and then, with real news. We never sell or share your details.</li>
+      <li>Entries are stored in a private Google Form that only the Detent team can see.</li>
+    </ul>
+
+    <h2>The Detent device and bridge on your computer</h2>
+    <p>The bridge runs on your computer and accepts connections only from it. Detent talks to the bridge over USB and has no internet connection of its own. Used on its own, nothing leaves your computer: decisions are written to a log file in your home folder (<code>~/.detent</code>).</p>
+    <p>Before anything is shown on the device, written to the log or sent anywhere, the bridge removes common secrets from commands, such as API keys, access tokens, passwords and private keys.</p>
+
+    <h2>Detent for Teams (your employer's server)</h2>
+    <p>If your company uses Detent for Teams, your computer is enrolled with your company's Detent server. Then the bridge sends that server your approval records: time, your name and username, the computer's name, the AI agent, project, the action (with secrets removed, or only the control name if your company chose that), the decision and how it was made, and your Detent's serial number. Your company is responsible for that data, and its own privacy notice applies.</p>
+    <ul>
+      <li><strong>Self-hosted:</strong> the server runs on your company's systems. Detent the company never receives the data.</li>
+      <li><strong>Hosted by Detent:</strong> we store it for your company, only to provide the service, in the region your company chose, under a data processing agreement. We do not sell it or use it to train AI models. It is deleted when your company asks or 30 days after its contract ends.</li>
+    </ul>
+
+    <h2>Sub-processors (hosted service only)</h2>
+    <p>We will list every outside service that stores or processes customer data here before the hosted service launches, and give customers 30 days' notice of any change.</p>
+
+    <h2>Your rights</h2>
+    <p>You can ask to see, correct or delete data we hold about you. For waitlist data, email <a href="mailto:devvratpathak.dp@gmail.com">devvratpathak.dp@gmail.com</a>. For data held by your employer's Detent server, ask your employer; we will help them respond.</p>
+  </div>
+</main>
+
+<footer class="foot band band--ink">
+  <div class="wrap foot__in">
+    <p>Designed in Dubai.</p>
+    <nav class="foot__nav" aria-label="Footer">
+      <a href="./">Detent</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="security.html">Security</a>
+      <a href="warranty.html">Warranty</a>
+    </nav>
+    <p class="foot__copy">© 2026 Detent</p>
+  </div>
+</footer>
+</body>
+</html>
