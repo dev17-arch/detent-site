@@ -27,80 +27,118 @@
   });
 
   /* ---------------------------------------------------------------- hero field
-     Lanes of agent actions flow left to right. Everyday ones pass the gate.
-     Risky ones stop at the gate, glow, wait for a person, then go on.
-     The gate sits on the front edge of the Detent, whose light strip shows what is waiting. */
+     Lanes of agent actions curve in towards the Detent.
+     Safe steps (green) flow straight in. Risky steps (red) stop at its edge, its light strip
+     turns red while they wait, then they turn green and go in. Only green comes out. */
   var canvas = $("#field");
   if (canvas && canvas.getContext) {
-    var ctx = canvas.getContext("2d"), W = 0, H = 0, dpr = 1, lanes = [], packets = [], gateX = 0, last = 0, visible = true;
+    var ctx = canvas.getContext("2d"), W = 0, H = 0, dpr = 1, lanes = [], outs = [], packets = [], outPk = [], gateX = 0, gateY = 0, outX = 0, last = 0, visible = true;
     var hero = $(".hero"), dev = $(".hero__device"), waiting = 0, okUntil = 0, clock = 0;
+    var GREEN = "127,209,168", RED = "255,84,72";
     function size() {
       dpr = Math.min(2, window.devicePixelRatio || 1);
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = W * dpr; canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       var hr = hero.getBoundingClientRect(), dr = dev ? dev.getBoundingClientRect() : null;
-      var gp = dr && dr.width && W >= 860 ? (dr.left - hr.left + dr.width * .43) / W : (W < 860 ? .78 : .64);
-      gateX = W * gp;
-      hero.style.setProperty("--gate", (gp * 100) + "%");
-      var n = W < 600 ? 9 : 14, top = H * .12, span = H * .8;
-      lanes = [];
-      for (var i = 0; i < n; i++) lanes.push({ y: top + span * (i + .5) / n, speed: 60 + Math.random() * 70, next: Math.random() * 1.5 });
-      packets = [];
+      if (dr && dr.width) {            // the device's front-left and right edges in the photo
+        gateX = dr.left - hr.left + dr.width * .425;
+        gateY = dr.top - hr.top + dr.height * .56;
+        outX = dr.left - hr.left + dr.width * .93;
+      } else { gateX = W * .64; gateY = H * .4; outX = W; }
+      var n = W < 860 ? 0 : 16, top = H * .06, span = H * .9;   // phones: the strip animates on its own
+      lanes = []; outs = [];
+      for (var i = 0; i < n; i++) lanes.push({ y0: top + span * (i + .5) / n, speed: 70 + Math.random() * 70, next: Math.random() * 1.5 });
+      var m = W - outX > 60 ? 9 : 0;
+      for (var o = 0; o < m; o++) outs.push({ y1: top + span * (o + .5) / m });
+      packets = []; outPk = [];
+    }
+    function yIn(l, x) {               // straight on the left, bending into the device
+      var s = Math.max(0, Math.min(1, x / gateX));
+      s = Math.pow(s, 2.2);
+      return l.y0 + (gateY + (l.y0 - gateY) * .06 - l.y0) * s;
+    }
+    function yOut(l, x) {              // leaves the device together, then fans out
+      var s = Math.max(0, Math.min(1, (x - outX) / Math.max(1, W - outX)));
+      return gateY + (l.y1 - gateY) * (1 - Math.pow(1 - s, 2.2));
+    }
+    function seg(f, l, x0, x1) {
+      ctx.beginPath();
+      for (var k = 0; k <= 8; k++) { var x = x0 + (x1 - x0) * k / 8; if (k) ctx.lineTo(x, f(l, x)); else ctx.moveTo(x, f(l, x)); }
+      ctx.stroke();
     }
     function spawn(l) {
-      var risky = Math.random() < .09;
-      packets.push({ lane: l, x: -20, v: l.speed * (risky ? 1 : .8 + Math.random() * .5), risky: risky, state: "run", t: 0, len: 18 + Math.random() * 46, a: .25 + Math.random() * .45 });
+      var risky = Math.random() < .14;
+      packets.push({ lane: l, x: -20, v: l.speed * (risky ? 1 : .8 + Math.random() * .5), risky: risky, state: "run", t: 0, len: 18 + Math.random() * 46, a: .45 + Math.random() * .4, done: false });
+    }
+    function emit(v) {
+      if (!outs.length) return;
+      outPk.push({ lane: outs[(Math.random() * outs.length) | 0], x: outX, v: Math.max(90, v), len: 18 + Math.random() * 40, a: .55 + Math.random() * .4 });
+    }
+    function dot(col, x, y, r, alpha, blur) {
+      ctx.fillStyle = "rgba(" + col + "," + alpha + ")";
+      ctx.shadowColor = "rgba(" + col + ",.9)"; ctx.shadowBlur = blur;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+    function tail(f, l, col, x0, x1, alpha, w) {
+      var g = ctx.createLinearGradient(x0, 0, x1, 0);
+      g.addColorStop(0, "rgba(" + col + ",0)"); g.addColorStop(1, "rgba(" + col + "," + alpha + ")");
+      ctx.strokeStyle = g; ctx.lineWidth = w;
+      seg(f, l, x0, x1);
     }
     function frame(ts) {
       var dt = Math.min(.05, (ts - (last || ts)) / 1000); last = ts; clock += dt;
-      var nowWaiting = 0;
       ctx.clearRect(0, 0, W, H);
-      // lane hairlines
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 1; ctx.strokeStyle = "rgba(255,255,255,.035)";
       for (var i = 0; i < lanes.length; i++) {
         var l = lanes[i];
-        ctx.strokeStyle = "rgba(255,255,255,.035)";
-        ctx.beginPath(); ctx.moveTo(0, l.y + .5); ctx.lineTo(W, l.y + .5); ctx.stroke();
+        seg(yIn, l, 0, gateX);
         l.next -= dt;
         if (l.next <= 0) { spawn(l); l.next = .5 + Math.random() * 1.8; }
       }
+      for (var o = 0; o < outs.length; o++) seg(yOut, outs[o], outX, W);
+
+      var nowWaiting = 0;
       for (var j = packets.length - 1; j >= 0; j--) {
-        var p = packets[j], y = p.lane.y;
+        var p = packets[j], l2 = p.lane;
         if (p.state === "run") {
           var nx = p.x + p.v * dt;
-          if (p.risky && p.x < gateX - 6 && nx >= gateX - 6) { nx = gateX - 6; p.state = "wait"; p.t = 0; }
+          if (p.risky && nx >= gateX - 8) { nx = gateX - 8; p.state = "wait"; p.t = 0; }
           p.x = nx;
         } else if (p.state === "wait") {
           p.t += dt; nowWaiting++;
-          if (p.t > 1.6 + Math.random() * .02) { p.state = "go"; p.v *= 1.4; okUntil = clock + .7; }
+          if (p.t > 1.8) { p.state = "go"; p.v *= 1.3; okUntil = clock + .7; }
         } else { p.x += p.v * dt; }
-        if (p.x - p.len > W + 20) { packets.splice(j, 1); continue; }
-        var past = p.x > gateX;
+        if (!p.done && p.x >= gateX) { p.done = true; emit(p.v); }
+        if (p.x - p.len > gateX) { packets.splice(j, 1); continue; }
+        var fade = Math.max(0, Math.min(1, (gateX - (p.x - p.len * .5)) / 60));
+        var head = Math.min(p.x, gateX), y = yIn(l2, head);
+        var col = p.risky && p.state !== "go" ? RED : GREEN;
         if (p.risky) {
-          var col = p.state === "go" && past ? "127,209,168" : "240,122,53";
-          var g = ctx.createLinearGradient(p.x - p.len * 1.6, 0, p.x, 0);
-          g.addColorStop(0, "rgba(" + col + ",0)"); g.addColorStop(1, "rgba(" + col + ",.9)");
-          ctx.strokeStyle = g; ctx.lineWidth = 2;
-          ctx.beginPath(); ctx.moveTo(p.x - (p.state === "wait" ? 8 : p.len * 1.6), y); ctx.lineTo(p.x, y); ctx.stroke();
+          tail(yIn, l2, col, head - (p.state === "wait" ? 10 : p.len * 1.6), head, .9 * fade, 2);
           var pulse = p.state === "wait" ? (Math.sin(p.t * 7) * .5 + .5) : 0;
-          ctx.fillStyle = "rgba(" + col + ",1)";
-          ctx.shadowColor = "rgba(" + col + ",.9)"; ctx.shadowBlur = 14 + pulse * 18;
-          ctx.beginPath(); ctx.arc(p.x, y, 3 + pulse * 1.5, 0, Math.PI * 2); ctx.fill();
-          ctx.shadowBlur = 0;
+          dot(col, head, y, 3 + pulse * 1.5, fade, 14 + pulse * 18);
           if (p.state === "wait") {
-            ctx.strokeStyle = "rgba(240,122,53," + (.5 - p.t * .25) + ")"; ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.arc(p.x, y, 6 + p.t * 14, 0, Math.PI * 2); ctx.stroke();
+            ctx.strokeStyle = "rgba(" + RED + "," + Math.max(0, .5 - p.t * .25) + ")"; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.arc(head, y, 6 + p.t * 14, 0, Math.PI * 2); ctx.stroke();
           }
         } else {
-          var gw = ctx.createLinearGradient(p.x - p.len, 0, p.x, 0);
-          gw.addColorStop(0, "rgba(237,237,239,0)"); gw.addColorStop(1, "rgba(237,237,239," + p.a + ")");
-          ctx.strokeStyle = gw; ctx.lineWidth = 1.2;
-          ctx.beginPath(); ctx.moveTo(p.x - p.len, y); ctx.lineTo(p.x, y); ctx.stroke();
+          tail(yIn, l2, col, p.x - p.len, head, p.a * fade, 1.4);
+          dot(col, head, y, 2, p.a * fade, 8);
         }
       }
-      if (nowWaiting !== waiting) { waiting = nowWaiting; hero.classList.toggle("is-waiting", waiting > 0); }
-      hero.classList.toggle("is-ok", !waiting && clock < okUntil);
+      for (var q = outPk.length - 1; q >= 0; q--) {
+        var r = outPk[q];
+        r.x += r.v * dt;
+        if (r.x - r.len > W + 10) { outPk.splice(q, 1); continue; }
+        var fin = Math.max(0, Math.min(1, (r.x - outX) / 50));   // fades in as it leaves the device
+        var ry = yOut(r.lane, r.x);
+        tail(yOut, r.lane, GREEN, Math.max(outX, r.x - r.len), r.x, r.a * fin, 1.4);
+        dot(GREEN, r.x, ry, 2.2, r.a * fin, 10);
+      }
+      if (nowWaiting !== waiting && hero) { waiting = nowWaiting; hero.classList.toggle("is-waiting", waiting > 0); }
+      if (hero) hero.classList.toggle("is-ok", !waiting && clock < okUntil);
       if (visible && !reduce) requestAnimationFrame(frame);
     }
     size();
@@ -112,7 +150,7 @@
     }
     function warm() {      // start with the lanes already busy
       var saveVis = visible; visible = false;
-      for (var k = 0; k < 220; k++) frame(k * 33);
+      for (var k = 0; k < 260; k++) frame(k * 33);
       visible = saveVis; last = 0;
     }
     if (reduce) prefill();

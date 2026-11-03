@@ -400,8 +400,8 @@ p { margin: 0; }
 h1, h2, h3 { text-wrap: balance; }
 
 /* ------------------------------------------------------------------ hero device: the lanes run into it */
-.hero__device { position: absolute; z-index: -1; right: 0; top: 50%; margin-top: calc(min(50vw, 1000px) * -.5625 * .62); width: min(50vw, 1000px); mix-blend-mode: lighten; aspect-ratio: 16 / 9; pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 62% 64% at 68% 50%, #000 52%, transparent 100%); mask-image: radial-gradient(ellipse 62% 64% at 68% 50%, #000 52%, transparent 100%);
+.hero__device { position: absolute; z-index: -1; right: 6vw; top: 50%; margin-top: calc(min(48vw, 980px) * -.5625 * .6); width: min(48vw, 980px); mix-blend-mode: lighten; aspect-ratio: 16 / 9; pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse 46% 54% at 67% 52%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 46% 54% at 67% 52%, #000 60%, transparent 100%);
   opacity: 0; transform: translateY(14px) scale(.985); animation: devIn 1.6s var(--ease) .15s forwards; }
 .hero__device img { width: 100%; height: 100%; object-fit: cover; display: block; }
 /* light strip on the front edge: orange while a step waits, green when approved */
@@ -409,13 +409,23 @@ h1, h2, h3 { text-wrap: balance; }
 .hero.is-waiting .hero__strip { opacity: .95; animation: breathe 1.4s ease-in-out infinite; }
 .hero.is-ok .hero__strip { opacity: .9; background: #7FD1A8; box-shadow: 0 0 18px 4px rgba(127,209,168,.6), 0 0 60px 10px rgba(127,209,168,.3); }
 @keyframes devIn { to { opacity: 1; transform: none; } }
+.hero__gate { display: none; }
 @media (max-width: 860px) {
-  .hero__device { width: 175vw; right: auto; left: -68vw; top: 56px; margin-top: 0; }
-  .hero__gate { display: none; }
+  .hero__device { width: 175vw; right: auto; left: -68vw; top: 56px; }
 }
 @media (prefers-reduced-motion: reduce) { .hero__device { opacity: 1; transform: none; animation: none; } }
 
-.hero__gate { z-index: -1; }
-.hero__device { z-index: 0; }
-.hero__in, .hero__legend { position: relative; z-index: 1; }
-.hero__legend { position: absolute; }
+/* hero: safe steps green, risky red, only green leaves the device */
+.dot--safe { background: #7FD1A8; box-shadow: 0 0 8px rgba(127,209,168,.8); }
+.dot--red { background: #FF5448; box-shadow: 0 0 10px rgba(255,84,72,.9); }
+.hero.is-waiting .hero__strip { background: #FF5448; box-shadow: 0 0 18px 4px rgba(255,84,72,.7), 0 0 60px 10px rgba(255,84,72,.35); }
+@media (max-width: 860px) {
+  .hero__field { display: none; }
+  .hero__strip { animation: stripCycle 5s var(--ease) 1.2s infinite; }
+}
+@keyframes stripCycle {
+  0%, 8% { opacity: 0; background: #FF5448; box-shadow: 0 0 18px 4px rgba(255,84,72,.7), 0 0 60px 10px rgba(255,84,72,.35); }
+  14%, 52% { opacity: .95; background: #FF5448; box-shadow: 0 0 18px 4px rgba(255,84,72,.7), 0 0 60px 10px rgba(255,84,72,.35); }
+  58%, 76% { opacity: .9; background: #7FD1A8; box-shadow: 0 0 18px 4px rgba(127,209,168,.6), 0 0 60px 10px rgba(127,209,168,.3); }
+  86%, 100% { opacity: 0; background: #7FD1A8; }
+}
