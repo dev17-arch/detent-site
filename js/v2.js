@@ -5,6 +5,13 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
+  /* ---------------------------------------------------------------- Kickstarter links
+     Every "Back it on Kickstarter" button reads this one address. Empty = scroll to the sign-up. */
+  var KICKSTARTER_URL = "";
+  if (KICKSTARTER_URL) {
+    $$("[data-ks]").forEach(function (a) { a.href = KICKSTARTER_URL; a.target = "_blank"; a.rel = "noopener"; });
+  }
+
   /* ---------------------------------------------------------------- nav */
   var nav = $("#nav"), menu = $("#menu");
   function onScroll() { nav.classList.toggle("is-scrolled", window.scrollY > 24); }

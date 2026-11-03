@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://detentdesk.com/">
 <meta property="og:image" content="https://detentdesk.com/img/hero_graphite.webp">
 <meta name="theme-color" content="#0B0B0C">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='8' fill='none' stroke='%23F07A35' stroke-width='2'/%3E%3Cline x1='10' y1='3.5' x2='10' y2='7.5' stroke='%23F07A35' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B0B0C'/%3E%3Cpath d='M10.4 10.4a8.6 8.6 0 1 0 11.2 0' fill='none' stroke='%23F07A35' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='16' y1='6.5' x2='16' y2='15' stroke='%23FFFFFF' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -33,7 +33,7 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">Questions</a>
     </nav>
-    <a class="btn btn--sm" href="#waitlist">Join the waitlist</a>
+    <a class="btn btn--sm" data-ks href="#waitlist">Back on Kickstarter</a>
     <button class="nav__menu" id="menu" type="button" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span class="sr">Menu</span></button>
   </div>
 </header>
@@ -54,7 +54,7 @@
     <div class="hero__foot">
       <p class="hero__lede">Detent lets everyday agent work straight through and stops only before steps that can't be undone: a force push, a deploy, a payment. Approve on the desk device or your phone. Every decision is signed and kept.</p>
       <div class="hero__cta">
-        <a class="btn" href="#waitlist">Join the waitlist</a>
+        <a class="btn" data-ks href="#waitlist">Back it on Kickstarter</a>
         <a class="btn btn--ghost" href="#story">See how it works</a>
       </div>
     </div>
@@ -276,7 +276,7 @@
   <div class="wrap">
     <header class="head" data-reveal>
       <h2 id="pricing-title">Back it early, pay less.</h2>
-      <p>Planned prices in US dollars. Nothing is for sale yet, and joining the waitlist costs nothing.</p>
+      <p>Planned prices in US dollars. Follow the campaign on Kickstarter to get the $149 early-bird price.</p>
     </header>
     <div class="prices">
       <article class="price price--lead" data-reveal data-glow>
@@ -296,6 +296,7 @@
         <p>Company rules on every computer, approval records, passkey approvals. Regulated plan from $39.</p>
       </article>
     </div>
+    <p class="prices__cta" data-reveal><a class="btn" data-ks href="#waitlist">Back it on Kickstarter</a></p>
   </div>
 </section>
 
@@ -309,7 +310,7 @@
       <details><summary>Does anything leave my computer?</summary><div><p>Not for individuals: there is no account and no cloud service. Companies connect computers to their own Detent server, which they can run inside their own network.</p></div></details>
       <details><summary>What happens if Detent is unplugged?</summary><div><p>Nothing changes for your agent. If nobody answers within 110 seconds, it shows its normal approval prompt on screen.</p></div></details>
       <details><summary>Does Detent help with audits and AI rules?</summary><div><p>It keeps the record auditors ask for: the person's name, the date and time, and what the decision meant, each line chained to the one before. Holding the button to stop every agent is the kind of stop control the EU AI Act describes. Detent is one control, not a certificate; what applies to you depends on your company.</p></div></details>
-      <details><summary>When does it ship?</summary><div><p>The working prototype is being built now. The Kickstarter follows once developers have used it daily, and the waitlist hears the date first.</p></div></details>
+      <details><summary>When does it ship?</summary><div><p>The working prototype is being built now. The Kickstarter follows once developers have used it daily. Follow the Kickstarter page to hear the date first.</p></div></details>
     </div>
   </div>
 </section>
@@ -319,10 +320,12 @@
   <div class="wrap waitlist__grid">
     <div data-reveal>
       <h2 id="wl-title">Get the early-bird price.</h2>
-      <p class="waitlist__lede">The waitlist hears first when the campaign opens, while the $149 spots are still there.</p>
+      <p class="waitlist__lede">The first 100 backers on Kickstarter get Detent for $149. Follow the campaign and Kickstarter tells you the moment it opens.</p>
+      <a class="btn btn--lg" data-ks href="#waitlist">Back it on Kickstarter</a>
     </div>
     <div class="wl card" data-reveal data-glow>
       <form class="wl__form" id="wl-form" novalidate>
+        <p class="wl__intro">Not on Kickstarter? Get one email when it launches.</p>
         <div class="field">
           <label for="wl-email">Email</label>
           <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="you@company.com" required aria-describedby="wl-email-msg">
@@ -341,7 +344,7 @@
           <label for="wl-runs">How many run at once, usually? <span class="opt">Optional</span></label>
           <select id="wl-runs" name="runs"><option value="">Choose</option><option value="1">One</option><option value="2-3">Two or three</option><option value="4+">Four or more</option></select>
         </div>
-        <button class="btn btn--wide" id="wl-submit" type="submit">Join the waitlist</button>
+        <button class="btn btn--ghost btn--wide" id="wl-submit" type="submit">Email me at launch</button>
         <p class="wl__status" id="wl-status" role="status" aria-live="polite"></p>
         <p class="wl__fine">We use your email only to tell you about Detent. <a href="privacy.html">Privacy</a></p>
       </form>
