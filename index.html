@@ -5,403 +5,366 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Detent</title>
 <link rel="canonical" href="https://detentdesk.com/">
+<meta name="description" content="Detent lets AI coding agents keep working and stops them only before the steps that can't be undone. Approve on a desk device or your phone; every decision is signed and recorded.">
 <meta property="og:title" content="Detent: a control panel for AI agents">
+<meta property="og:description" content="Agents keep working. Risky steps wait for a person. Every decision is signed.">
 <meta property="og:url" content="https://detentdesk.com/">
-<meta name="description" content="Detent is a desk control panel for AI coding agents. Agents keep working; Detent asks only before steps that can't be undone, and one long press stops them all.">
+<meta property="og:image" content="https://detentdesk.com/img/hero_graphite.webp">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='8' fill='none' stroke='%23F07A35' stroke-width='2'/%3E%3Cline x1='10' y1='3.5' x2='10' y2='7.5' stroke='%23F07A35' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..700&family=Funnel+Sans:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/site.css">
-<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/v2.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="bar glass-bar">
-  <div class="bar__in wrap">
-    <a class="mark" href="#top" aria-label="Detent, back to top">
-      <svg class="mark__knob" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><line x1="10" y1="3.6" x2="10" y2="7.4"/></svg>
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="#top" aria-label="Detent, back to top">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8"/><line x1="10" y1="3.5" x2="10" y2="7.5"/></svg>
       <span>detent</span>
     </a>
-    <nav class="nav" id="nav" aria-label="Sections">
-      <a href="#how">How it works</a>
-      <a href="#agents">Agents</a>
-      <a href="#design">Design</a>
+    <nav class="nav__links" id="nav-links" aria-label="Sections">
+      <a href="#story">How it works</a>
+      <a href="#product">Product</a>
+      <a href="#teams">Companies</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">Questions</a>
     </nav>
-    <a class="btn btn--small" href="#waitlist">Join the waitlist</a>
-    <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <a class="btn btn--sm" href="#waitlist">Join the waitlist</a>
+    <button class="nav__menu" id="menu" type="button" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span class="sr">Menu</span></button>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ============================================================ hero: the product is the background -->
-  <section class="stage" id="top" aria-labelledby="hero-title">
-    <picture class="stage__bg">
-      <source media="(max-aspect-ratio: 4/5)" srcset="img/bg_tall.webp" width="1200" height="1800">
-      <img src="img/bg_center.webp" width="2400" height="1350" alt="Detent in graphite on a dark desk, its screen asking to approve git push --force origin main, the light bar along its front edge glowing red." fetchpriority="high">
-    </picture>
-    <div class="stage__veil" aria-hidden="true"></div>
-    <div class="wrap stage__in">
-      <div class="stage__head">
-        <p class="eyebrow eyebrow--glass">A control panel for AI agents</p>
-        <h1 class="stage__title" id="hero-title"><span>Read it.</span> <span>Turn it.</span> <span>Run it.</span></h1>
-      </div>
-      <div class="stage__foot">
-        <p class="stage__lede">Your agents keep working. Detent asks only before the steps that can't be undone, and holding one button stops them all.</p>
-        <div class="stage__cta">
-          <a class="btn" href="#waitlist">Join the waitlist</a>
-          <a class="btn btn--glass" href="#how">Try the knob</a>
-        </div>
-        <p class="stage__price">From $149 on Kickstarter · $199 after launch</p>
+<!-- ================================================================ hero -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <canvas class="hero__field" id="field" aria-hidden="true"></canvas>
+  <div class="hero__gate" aria-hidden="true"><span>Detent</span></div>
+  <div class="hero__in">
+    <h1 class="hero__title" id="hero-title">
+      <span class="line"><span>Your agents</span></span>
+      <span class="line"><span>keep working.</span></span>
+      <span class="line line--dim"><span>The risky steps</span></span>
+      <span class="line line--dim"><span>wait for you.</span></span>
+    </h1>
+    <div class="hero__foot">
+      <p class="hero__lede">Detent lets everyday agent work straight through and stops only before steps that can't be undone: a force push, a deploy, a payment. Approve on the desk device or your phone. Every decision is signed and kept.</p>
+      <div class="hero__cta">
+        <a class="btn" href="#waitlist">Join the waitlist</a>
+        <a class="btn btn--ghost" href="#story">See how it works</a>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="hero__legend" aria-hidden="true">
+    <span><i class="dot"></i>Let through</span>
+    <span><i class="dot dot--risk"></i>Waits for a person</span>
+  </div>
+</section>
 
-  <!-- ============================================================ problem -->
-  <section class="band band--ink statement">
-    <div class="wrap">
-      <p class="statement__big">Agents now run for hours, several at once. Approve every step and they crawl. Skip approvals and nobody checks the steps that can't be undone.</p>
-      <p class="statement__small">Detent lets the everyday work through and stops only at the few steps that matter: a force push, a deploy, a merge into main. Those take a full turn of the knob. And if anything goes wrong, hold the button for two seconds and every agent stops.</p>
+<!-- ================================================================ story (scroll-driven) -->
+<section class="story" id="story" aria-label="How Detent works">
+  <div class="story__grid">
+    <div class="story__steps">
+      <article class="step" data-step="0">
+        <p class="step__n">1 of 5</p>
+        <h2>Agents run for hours now, several at once.</h2>
+        <p>A single afternoon can mean hundreds of commands across a handful of projects. Approve each one and the agent crawls. Approve none and nobody checks the steps that matter.</p>
+      </article>
+      <article class="step" data-step="1">
+        <p class="step__n">2 of 5</p>
+        <h2>Every action gets a risk level before anything runs.</h2>
+        <p>Reading files and running tests are let through. A force push to main, a production deploy or a refund is marked high risk. Companies set their own rules; the default ones work on day one.</p>
+      </article>
+      <article class="step" data-step="2">
+        <p class="step__n">3 of 5</p>
+        <h2>Only the high-risk steps stop.</h2>
+        <p>The agent keeps working on everything else. One question waits, with the full command and a plain reason why it matters.</p>
+      </article>
+      <article class="step" data-step="3">
+        <p class="step__n">4 of 5</p>
+        <h2>A person decides, on the desk or on their phone.</h2>
+        <p>Wind the Detent knob a full turn and press, or approve with Face ID or Touch ID. A quick reflex tap never counts, and holding the button stops every agent at once.</p>
+      </article>
+      <article class="step" data-step="4">
+        <p class="step__n">5 of 5</p>
+        <h2>Every decision is signed and chained.</h2>
+        <p>Who approved, what, when, and how. Each record links to the one before, so a changed or deleted line shows up. Export it, or hand the auditor a ready report.</p>
+      </article>
     </div>
-  </section>
 
-  <!-- ============================================================ the wind -->
-  <section class="band band--ink wind" id="how" aria-labelledby="wind-title">
-    <div class="wrap wind__grid">
-      <div class="wind__copy">
-        <p class="eyebrow eyebrow--dim">How it works</p>
-        <h2 id="wind-title">Effort that matches the risk.</h2>
-        <p>Every request gets a risk tier before it reaches the screen. A force push to main is tier 2, so the button does nothing until you wind the big knob a full 360 degrees. Then you have five seconds to press.</p>
-        <p class="wind__how">Try it here. Drag the knob, scroll over it, or focus it and use the arrow keys. Hold the button to deny.</p>
-        <div class="seg" role="tablist" aria-label="Example request">
-          <button type="button" role="tab" id="tab-high" aria-selected="true" data-case="high">Force push</button>
-          <button type="button" role="tab" id="tab-normal" aria-selected="false" data-case="normal">Run tests</button>
+    <div class="story__stage" aria-hidden="true">
+      <div class="panel" id="panel" data-step="0">
+        <div class="panel__bar">
+          <span class="panel__lights"><i></i><i></i><i></i></span>
+          <span class="panel__title">Agent activity</span>
+          <span class="panel__count"><b id="count">0</b> actions today</span>
         </div>
-      </div>
+        <div class="panel__body">
+          <ul class="feed" id="feed"></ul>
 
-      <div class="demo" id="demo" data-case="high">
-        <div class="demo__body">
-          <div class="screen" aria-live="polite">
-            <div class="screen__top">
-              <span class="screen__agent" id="d-agent">Codex · web-app</span>
-              <span class="screen__tier" id="d-tier">High risk</span>
+          <div class="ask">
+            <div class="ask__top"><span>Codex in payments-api</span><span class="tag tag--risk">High risk</span></div>
+            <code class="ask__cmd">git push --force origin main</code>
+            <p class="ask__why">Rewrites shared history on main</p>
+            <div class="ask__ways">
+              <div class="way way--desk">
+                <svg viewBox="0 0 64 64"><circle class="ring" cx="32" cy="32" r="26"/><circle class="arc" cx="32" cy="32" r="26"/><circle cx="32" cy="32" r="17"/><line x1="32" y1="17" x2="32" y2="23"/></svg>
+                <span>Turn and press</span>
+              </div>
+              <div class="way way--phone">
+                <svg viewBox="0 0 64 64"><rect x="20" y="8" width="24" height="48" rx="6"/><path class="tick" d="M26 33l4.5 4.5L39 28"/></svg>
+                <span>Approve with a passkey</span>
+              </div>
             </div>
-            <code class="screen__cmd" id="d-cmd">git push --force origin main</code>
-            <p class="screen__why" id="d-why">Rewrites shared history on main</p>
-            <div class="screen__meter" id="d-meter-wrap">
-              <span class="screen__deg" id="d-deg">0°</span><span class="screen__of" id="d-of">of 360°</span>
-              <div class="meter"><div class="meter__fill" id="d-meter"></div></div>
-            </div>
-            <div class="screen__choice" id="d-choice" hidden>
-              <span class="pick" id="d-deny">Deny</span><span class="pick is-on" id="d-allow">Allow</span>
-            </div>
-            <p class="screen__hint" id="d-hint">Wind the big knob a full turn</p>
+            <p class="ask__done">Approved by Aisha Khan, 14:02:11</p>
           </div>
-          <div class="controls">
-            <div class="knob" id="knob" role="slider" tabindex="0" aria-label="Big knob" aria-valuemin="0" aria-valuemax="360" aria-valuenow="0" aria-valuetext="0 degrees">
-              <svg viewBox="0 0 120 120" aria-hidden="true">
-                <defs>
-                  <radialGradient id="kg" cx="38%" cy="32%" r="80%">
-                    <stop offset="0" stop-color="#f3f3f1"/><stop offset=".55" stop-color="#b9bab8"/><stop offset="1" stop-color="#7c7d7c"/>
-                  </radialGradient>
-                </defs>
-                <g class="knob__ticks"></g>
-                <g id="knob-rot">
-                  <circle cx="60" cy="60" r="44" fill="url(#kg)"/>
-                  <circle cx="60" cy="60" r="44" fill="none" stroke="#5d5e5e" stroke-width="1.2" stroke-dasharray="1.4 1.6"/>
-                  <circle cx="60" cy="60" r="34" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width=".8"/>
-                  <circle cx="60" cy="27" r="2.6" fill="#2a2b2d"/>
-                </g>
-              </svg>
-            </div>
-            <button type="button" class="press" id="press" aria-describedby="d-hint">Press</button>
+
+          <div class="chain">
+            <div class="block"><span>#4812</span><b>Approved by a person</b><code>git push --force origin main</code><em>prev 9f3a…c21e</em></div>
+            <div class="block"><span>#4811</span><b>Blocked by a team rule</b><code>terraform destroy</code><em>prev 51be…07aa</em></div>
+            <div class="block"><span>#4810</span><b>Let through by rules</b><code>npm test</code><em>prev e04c…9b13</em></div>
+            <p class="chain__ok"><i></i>4,812 records intact</p>
           </div>
         </div>
-        <div class="demo__strip" id="d-strip" aria-hidden="true"></div>
-        <button type="button" class="link link--light demo__again" id="again" hidden>Run it again</button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============================================================ tiers -->
-  <section class="band band--paper tiers">
-    <div class="wrap">
-      <h2>Three tiers. Only one stops your agents.</h2>
-      <div class="tiers__table" role="table" aria-label="Risk tiers">
-        <div class="tiers__row tiers__head" role="row">
-          <span role="columnheader">Tier</span><span role="columnheader">Examples</span><span role="columnheader">On Detent</span>
-        </div>
-        <div class="tiers__row" role="row">
-          <span role="cell"><b>0</b> Read-only</span>
-          <span role="cell"><code>ls</code> <code>git status</code> <code>cat README.md</code></span>
-          <span role="cell">Let through and counted</span>
-        </div>
-        <div class="tiers__row" role="row">
-          <span role="cell"><b>1</b> Normal work</span>
-          <span role="cell"><code>npm test</code> <code>pip install</code> editing files in the project</span>
-          <span role="cell">Let through and counted, or one press if you want to see everything</span>
-        </div>
-        <div class="tiers__row tiers__row--risk" role="row">
-          <span role="cell"><b>2</b> High risk</span>
-          <span role="cell"><code>git push --force</code> <code>rm -rf</code> <code>terraform apply</code> writing <code>.env</code></span>
-          <span role="cell">Full turn, then a press within 5 seconds</span>
-        </div>
-      </div>
-      <ul class="facts">
-        <li><b>0.7 seconds.</b> Presses in the first moment after a question appears are ignored, so a reflex tap never approves anything.</li>
-        <li><b>Hold to deny.</b> Holding the button refuses any request. On high-risk ones, a double press works too.</li>
-        <li><b>Fails safe.</b> If Detent is unplugged or nobody answers within 110 seconds, your agent asks on screen the way it always did.</li>
-        <li><b>Stop everything.</b> Keep holding the button for two seconds and every running agent stops at its next step.</li>
-        <li><b>Approve the result.</b> An agent can queue a finished merge or deploy and keep working. It waits on Detent and only runs once you approve it.</li>
-      </ul>
-    </div>
-  </section>
+<!-- ================================================================ product bento -->
+<section class="section" id="product" aria-labelledby="product-title">
+  <div class="wrap">
+    <header class="head" data-reveal>
+      <h2 id="product-title">One control, wherever the work is.</h2>
+      <p>A machined desk device for people who want a physical yes. Software that works without it for everyone else.</p>
+    </header>
 
-  <!-- ============================================================ agents -->
-  <section class="band band--paper agents" id="agents">
-    <div class="wrap agents__grid">
-      <div>
-        <p class="eyebrow">Agents</p>
-        <h2>Works with the agents you already run.</h2>
-        <p class="agents__lede">One command connects Detent to each agent's own approval hook. Several agents can wait at once: the small knob flips between them, and the light bar shows the most urgent.</p>
-      </div>
-      <dl class="agents__list">
-        <div><dt>Claude Code</dt><dd>Permission requests, plus when a session starts, waits and finishes</dd></div>
-        <div><dt>Codex</dt><dd>Permission requests for shell commands</dd></div>
-        <div><dt>Cursor</dt><dd>Every shell command before it runs</dd></div>
-        <div><dt>GitHub Copilot CLI, Gemini CLI, Devin</dt><dd>Shell commands, file writes and tool calls before they run</dd></div>
-        <div><dt>Anything else</dt><dd><code>detent ask -- git push</code> gates any command, a git hook included</dd></div>
-        <div><dt>Reviews</dt><dd><code>detent review -- gh pr merge 42</code> queues work for you without blocking the agent</dd></div>
-      </dl>
-    </div>
-  </section>
+    <div class="bento">
+      <!-- live knob -->
+      <article class="card card--demo" data-reveal data-glow>
+        <div class="card__copy">
+          <h3>Effort that matches the risk.</h3>
+          <p>A high-risk step needs a full 360° wind of the big knob, then a press within five seconds. Try it: drag the knob, scroll over it, or use the arrow keys. Hold the button to deny.</p>
+          <div class="seg" role="tablist" aria-label="Example request">
+            <span class="seg__pill" aria-hidden="true"></span>
+            <button type="button" role="tab" id="tab-high" aria-selected="true" data-case="high">Force push</button>
+            <button type="button" role="tab" id="tab-normal" aria-selected="false" data-case="normal">Run tests</button>
+          </div>
+        </div>
+        <div class="demo" id="demo" data-case="high">
+          <div class="demo__body">
+            <div class="screen" aria-live="polite">
+              <div class="screen__top"><span id="d-agent">Codex · web-app</span><span class="screen__tier" id="d-tier">High risk</span></div>
+              <code class="screen__cmd" id="d-cmd">git push --force origin main</code>
+              <p class="screen__why" id="d-why">Rewrites shared history on main</p>
+              <div class="screen__meter" id="d-meter-wrap">
+                <span class="screen__deg" id="d-deg">0°</span><span class="screen__of" id="d-of">of 360°</span>
+                <div class="meter"><div class="meter__fill" id="d-meter"></div></div>
+              </div>
+              <div class="screen__choice" id="d-choice" hidden><span class="pick" id="d-deny">Deny</span><span class="pick is-on" id="d-allow">Allow</span></div>
+              <p class="screen__hint" id="d-hint">Wind the big knob a full turn</p>
+            </div>
+            <div class="controls">
+              <div class="knob" id="knob" role="slider" tabindex="0" aria-label="Big knob" aria-valuemin="0" aria-valuemax="360" aria-valuenow="0" aria-valuetext="0 degrees">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <defs><radialGradient id="kg" cx="38%" cy="30%" r="80%"><stop offset="0" stop-color="#f4f4f2"/><stop offset=".55" stop-color="#b6b7b5"/><stop offset="1" stop-color="#6f706f"/></radialGradient></defs>
+                  <g class="knob__ticks"></g>
+                  <g id="knob-rot">
+                    <circle cx="60" cy="60" r="44" fill="url(#kg)"/>
+                    <circle cx="60" cy="60" r="44" fill="none" stroke="#565757" stroke-width="1.2" stroke-dasharray="1.4 1.6"/>
+                    <circle cx="60" cy="60" r="34" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width=".8"/>
+                    <circle cx="60" cy="27" r="2.6" fill="#2a2b2d"/>
+                  </g>
+                </svg>
+              </div>
+              <button type="button" class="press" id="press" aria-describedby="d-hint">Press</button>
+            </div>
+          </div>
+          <div class="demo__strip" id="d-strip" aria-hidden="true"></div>
+          <button type="button" class="demo__again" id="again" hidden>Run it again</button>
+        </div>
+      </article>
 
-  <!-- ============================================================ design -->
-  <section class="band band--stone design" id="design" aria-labelledby="design-title">
-    <div class="wrap">
-      <p class="eyebrow">Design</p>
-      <h2 id="design-title">Machined from one block of aluminium.</h2>
-      <p class="design__lede">124 by 76 millimetres, 10 mm tall at the front and 14 mm at the back, so the screen leans three degrees toward you. Heavy enough to stay put when you turn the knob.</p>
-      <div class="finish" role="radiogroup" aria-label="Finish">
-        <button type="button" role="radio" aria-checked="true" class="finish__opt" data-finish="graphite"><span class="swatch swatch--graphite"></span>Graphite</button>
-        <button type="button" role="radio" aria-checked="false" class="finish__opt" data-finish="silver"><span class="swatch swatch--silver"></span>Silver</button>
-      </div>
-      <figure class="design__shot">
-        <img id="finish-img" src="img/hero_graphite.webp" width="1800" height="1060" alt="Detent in graphite with steel knobs and an orange button.">
-      </figure>
-      <div class="lightbar">
-        <h3>The light bar</h3>
-        <p>A 64 mm strip along the front edge, readable from across the room.</p>
-        <ul class="states">
-          <li><span class="dot dot--work"></span>Working</li>
-          <li><span class="dot dot--wait"></span>Needs you</li>
-          <li><span class="dot dot--risk"></span>High risk waiting</li>
-          <li><span class="dot dot--done"></span>Finished</li>
+      <!-- device -->
+      <article class="card card--device" data-reveal data-glow>
+        <img src="img/bg_tall.webp" width="1200" height="1800" alt="Detent in graphite: a low aluminium slab with a screen, a large knurled knob, a small knob and an orange button." loading="lazy">
+        <div class="card__over">
+          <h3>Machined from one block.</h3>
+          <p>124 × 76 mm aluminium, 2.41-inch AMOLED, a 30 mm knurled steel knob. It shows the exact command, not a coloured light.</p>
+        </div>
+      </article>
+
+      <!-- stop -->
+      <article class="card card--stop" data-reveal data-glow>
+        <div class="stopviz" aria-hidden="true">
+          <span class="stopviz__btn"></span>
+          <span class="stopviz__ring"></span>
+        </div>
+        <h3>Hold two seconds. Everything stops.</h3>
+        <p>Every running agent stops at its next step. It's recorded, and starting again is one message away.</p>
+      </article>
+
+      <!-- phone -->
+      <article class="card card--phone" data-reveal data-glow>
+        <div class="phoneviz" aria-hidden="true">
+          <div class="phoneviz__card"><b>git push --force origin main</b><span>Codex in payments-api</span><i>Approve with Face ID</i></div>
+        </div>
+        <h3>No device? Use your phone.</h3>
+        <p>Approve with Face ID, Touch ID or Windows Hello. Each approval is a fresh passkey signature tied to that one action.</p>
+      </article>
+
+      <!-- agents -->
+      <article class="card card--agents" data-reveal data-glow>
+        <h3>Works with the agents you already run.</h3>
+        <ul class="agents">
+          <li>Claude Code</li><li>Codex</li><li>Cursor</li><li>GitHub Copilot CLI</li><li>Gemini CLI</li><li>Devin</li>
         </ul>
+        <p>One install command connects each agent's own approval hook. Anything else, from a script to a git hook, can call <code>detent ask</code>.</p>
+      </article>
+
+      <!-- record -->
+      <article class="card card--record" data-reveal data-glow>
+        <h3>A record nobody can quietly edit.</h3>
+        <div class="mini-chain" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <p>Name, time and meaning on every decision, each chained to the one before with SHA-256. Export as CSV or JSON.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ individuals / companies -->
+<section class="section section--line" id="teams" aria-labelledby="teams-title">
+  <div class="wrap">
+    <header class="head" data-reveal>
+      <h2 id="teams-title">Built for one desk, or ten thousand.</h2>
+    </header>
+    <div class="tabs" data-reveal>
+      <div class="tabs__list" role="tablist" aria-label="Who it's for">
+        <span class="tabs__pill" aria-hidden="true"></span>
+        <button role="tab" id="t-dev" aria-controls="p-dev" aria-selected="true">For developers</button>
+        <button role="tab" id="t-co" aria-controls="p-co" aria-selected="false" tabindex="-1">For companies</button>
+      </div>
+      <div class="tabs__panels">
+        <div class="tabs__panel" role="tabpanel" id="p-dev" aria-labelledby="t-dev">
+          <div class="facts">
+            <div><h3>Runs on your computer</h3><p>No account, no cloud. The software listens only to your own machine.</p></div>
+            <div><h3>Your rules</h3><p>Move a command you trust down a level, or add your own deploy script to the high-risk list.</p></div>
+            <div><h3>Fails safe</h3><p>Unplugged or no answer in 110 seconds, and your agent asks on screen the way it always did.</p></div>
+            <div><h3>Review the result</h3><p>Queue a finished merge or deploy and keep working. It runs only once you approve it.</p></div>
+          </div>
+        </div>
+        <div class="tabs__panel" role="tabpanel" id="p-co" aria-labelledby="t-co" hidden>
+          <div class="facts">
+            <div><h3>Company rules everywhere</h3><p>Set what needs approval once; every developer's computer follows it. Rule packs for banking, healthcare, pharma and e-commerce.</p></div>
+            <div><h3>Your server, your sign-in</h3><p>Runs inside your network, with Okta, Entra ID or Google sign-in and directory sync that removes leavers at once.</p></div>
+            <div><h3>Two-person approval</h3><p>Payments, production deploys or changes to the rules themselves can need a second approver.</p></div>
+            <div><h3>Audit-ready</h3><p>Reports for SOC 2, FINRA, FDA Part 11 and the EU AI Act, plus Splunk, Datadog, Jira, ServiceNow, Teams and GitHub.</p></div>
+          </div>
+          <p class="tabs__note">Detent for Teams is in early testing. <a href="#waitlist">Join the waitlist</a> and mention your company to try it free.</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============================================================ top view -->
-  <section class="band band--ink topview">
-    <div class="wrap topview__grid">
-      <figure class="topview__shot">
-        <img src="img/top_high_risk.webp" width="1400" height="1010" loading="lazy" alt="Detent from above, its screen asking to approve git push --force origin main, wound to 223 of 360 degrees, with the light bar glowing red.">
-      </figure>
-      <div class="topview__copy">
-        <h2>The whole command, not a coloured light.</h2>
-        <p>A 2.41-inch AMOLED shows which agent is asking, in which project, and the exact command, with a plain reason when it is risky. You approve what you read.</p>
-        <p>Want more before you decide? Push the small knob for the briefing: what the action does, what it touches, why it needs a full turn, and a safer way to do it. Turn the knob to page through. It is written on your computer, from rules, so nothing leaves your machine.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ specs -->
-  <section class="band band--paper specs" aria-labelledby="specs-title">
-    <div class="wrap">
-      <h2 id="specs-title">Specifications</h2>
-      <dl class="spec">
-        <div><dt>Size</dt><dd>124 × 76 mm, 10 to 14 mm tall, top tilted 3°</dd></div>
-        <div><dt>Weight</dt><dd>About 300 g (target)</dd></div>
-        <div><dt>Body</dt><dd>6061 aluminium, bead-blasted and anodised; steel base plate</dd></div>
-        <div><dt>Display</dt><dd>2.41-inch AMOLED, 600 × 450, under flush glass</dd></div>
-        <div><dt>Big knob</dt><dd>30 mm knurled steel, magnetic angle sensor, haptic detents</dd></div>
-        <div><dt>Small knob</dt><dd>14 mm, 24 detents; push it for the briefing</dd></div>
-        <div><dt>Button</dt><dd>25 × 11 mm, the only control that commits; hold 2 s to stop every agent</dd></div>
-        <div><dt>Haptics</dt><dd>Linear motor with its own pattern for each event</dd></div>
-        <div><dt>Light bar</dt><dd>64 mm, 12 LEDs, four states</dd></div>
-        <div><dt>Connection</dt><dd>USB-C for power and data; no battery, no Wi-Fi needed</dd></div>
-        <div><dt>Computer</dt><dd>macOS, Windows or Linux with Python 3</dd></div>
-        <div><dt>Software</dt><dd>Free with every Detent; runs on your computer and listens only to your computer</dd></div>
-      </dl>
-    </div>
-  </section>
-
-  <!-- ============================================================ pricing -->
-  <section class="band band--stone pricing" id="pricing" aria-labelledby="pricing-title">
-    <div class="wrap">
-      <p class="eyebrow">Pricing</p>
+<!-- ================================================================ pricing -->
+<section class="section section--line" id="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <header class="head" data-reveal>
       <h2 id="pricing-title">Back it early, pay less.</h2>
-      <p class="pricing__lede">Detent launches on Kickstarter first. These are planned prices in US dollars. Nothing is for sale yet, and joining the waitlist costs nothing.</p>
-      <div class="ladder" role="table" aria-label="Planned prices">
-        <div class="ladder__row ladder__row--lead" role="row">
-          <span class="ladder__name" role="cell">Early bird <span class="tag">First 100 backers</span></span>
-          <span class="ladder__what" role="cell">Kickstarter campaign. Detent in graphite or silver, USB-C cable. 25% below retail.</span>
-          <span class="ladder__price" role="cell">$149</span>
-        </div>
-        <div class="ladder__row" role="row">
-          <span class="ladder__name" role="cell">Campaign</span>
-          <span class="ladder__what" role="cell">Every backer after the first 100. 15% below retail.</span>
-          <span class="ladder__price" role="cell">$169</span>
-        </div>
-        <div class="ladder__row" role="row">
-          <span class="ladder__name" role="cell">Detent</span>
-          <span class="ladder__what" role="cell">From the store, after the campaign ships.</span>
-          <span class="ladder__price" role="cell">$199</span>
-        </div>
-        <div class="ladder__row" role="row">
-          <span class="ladder__name" role="cell">Team pack</span>
-          <span class="ladder__what" role="cell">Five units on one invoice, finishes mixed as you like. $179.80 each.</span>
-          <span class="ladder__price" role="cell">$899</span>
-        </div>
-        <div class="ladder__row" role="row">
-          <span class="ladder__name" role="cell">Company order</span>
-          <span class="ladder__what" role="cell">25 or more, engraved with your company name.</span>
-          <span class="ladder__price" role="cell">$159 each</span>
-        </div>
-        <div class="ladder__row" role="row">
-          <span class="ladder__name" role="cell">Detent for Teams</span>
-          <span class="ladder__what" role="cell">Your company's rules on every developer's Detent: block, review, ask or allow each kind of action, plus an approval log.</span>
-          <span class="ladder__price" role="cell">$15 / dev / mo</span>
-        </div>
-        <div class="ladder__row" role="row">
-          <span class="ladder__name" role="cell">Teams, Regulated</span>
-          <span class="ladder__what" role="cell">Rule packs for banking, healthcare, pharma and e-commerce, locked policies and log export for audits.</span>
-          <span class="ladder__price" role="cell">$39 / dev / mo</span>
-        </div>
-      </div>
-      <p class="addon"><b>Add-on: knob and button set, $29.</b> Brass, black or white, swapped in a minute.</p>
-      <p class="addon"><b>For companies:</b> Detent for Teams is in early testing. An admin console sets the rules once and every developer follows them. Developers approve on a Detent or with a passkey on their phone or laptop, so no hardware is required. It runs on your own server, with company sign-in (SSO), directory sync, two-person approval, signed approval records and audit reports for SOC 2, FINRA, FDA Part 11 and the EU AI Act. Join the waitlist and mention your company to try it. The software for a single Detent stays free.</p>
+      <p>Planned prices in US dollars. Nothing is for sale yet, and joining the waitlist costs nothing.</p>
+    </header>
+    <div class="prices">
+      <article class="price price--lead" data-reveal data-glow>
+        <h3>Early bird</h3><p class="price__n">$149</p>
+        <p>First 100 Kickstarter backers. Detent in graphite or silver, USB-C cable.</p>
+      </article>
+      <article class="price" data-reveal data-glow>
+        <h3>Campaign</h3><p class="price__n">$169</p>
+        <p>Every backer after the first 100.</p>
+      </article>
+      <article class="price" data-reveal data-glow>
+        <h3>Store</h3><p class="price__n">$199</p>
+        <p>After the campaign ships. The software for one Detent is always free.</p>
+      </article>
+      <article class="price" data-reveal data-glow>
+        <h3>Teams</h3><p class="price__n">$15<small> / developer / month</small></p>
+        <p>Company rules on every computer, approval records, passkey approvals. Regulated plan from $39.</p>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============================================================ waitlist -->
-  <section class="band band--ink waitlist" id="waitlist" aria-labelledby="wl-title">
-    <div class="wrap waitlist__grid">
-      <div>
-        <h2 id="wl-title">Get the early&#8209;bird price.</h2>
-        <p class="waitlist__lede">The waitlist hears first when the campaign opens, while the $149 spots are still there.</p>
-      </div>
+<!-- ================================================================ faq -->
+<section class="section section--line" id="faq" aria-labelledby="faq-title">
+  <div class="wrap wrap--narrow">
+    <header class="head" data-reveal><h2 id="faq-title">Questions</h2></header>
+    <div class="faq" data-reveal>
+      <details><summary>Won't this slow my agents down?</summary><div><p>No. By default Detent only asks before steps that can't be undone, like a force push, a deploy or a merge into main. Everything else goes straight through, and finished work can wait for review while the agent moves on.</p></div></details>
+      <details><summary>Can an agent approve its own request?</summary><div><p>No. A risky step only goes ahead after a turn and press on the device, or a passkey check with your face, fingerprint or PIN on your phone. Nothing an agent prints or sends can do either.</p></div></details>
+      <details><summary>Does anything leave my computer?</summary><div><p>Not for individuals: there is no account and no cloud service. Companies connect computers to their own Detent server, which they can run inside their own network.</p></div></details>
+      <details><summary>What happens if Detent is unplugged?</summary><div><p>Nothing changes for your agent. If nobody answers within 110 seconds, it shows its normal approval prompt on screen.</p></div></details>
+      <details><summary>Does Detent help with audits and AI rules?</summary><div><p>It keeps the record auditors ask for: the person's name, the date and time, and what the decision meant, each line chained to the one before. Holding the button to stop every agent is the kind of stop control the EU AI Act describes. Detent is one control, not a certificate; what applies to you depends on your company.</p></div></details>
+      <details><summary>When does it ship?</summary><div><p>The working prototype is being built now. The Kickstarter follows once developers have used it daily, and the waitlist hears the date first.</p></div></details>
+    </div>
+  </div>
+</section>
 
-      <div class="wl">
-        <form class="wl__form" id="wl-form" novalidate>
-          <div class="field">
-            <label for="wl-email">Email</label>
-            <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required aria-describedby="wl-email-msg">
-            <p class="field__msg" id="wl-email-msg" aria-live="polite"></p>
+<!-- ================================================================ waitlist -->
+<section class="waitlist" id="waitlist" aria-labelledby="wl-title">
+  <div class="wrap waitlist__grid">
+    <div data-reveal>
+      <h2 id="wl-title">Get the early-bird price.</h2>
+      <p class="waitlist__lede">The waitlist hears first when the campaign opens, while the $149 spots are still there.</p>
+    </div>
+    <div class="wl card" data-reveal data-glow>
+      <form class="wl__form" id="wl-form" novalidate>
+        <div class="field">
+          <label for="wl-email">Email</label>
+          <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="you@company.com" required aria-describedby="wl-email-msg">
+          <p class="field__msg" id="wl-email-msg" aria-live="polite"></p>
+        </div>
+        <fieldset class="field">
+          <legend>Which agents do you use? <span class="opt">Optional</span></legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="agents" value="Claude Code"><span>Claude Code</span></label>
+            <label class="check"><input type="checkbox" name="agents" value="Codex"><span>Codex</span></label>
+            <label class="check"><input type="checkbox" name="agents" value="Cursor"><span>Cursor</span></label>
+            <label class="check"><input type="checkbox" name="agents" value="Other"><span>Something else</span></label>
           </div>
-          <fieldset class="field">
-            <legend>Which agents do you use? <span class="opt">Optional</span></legend>
-            <div class="checks">
-              <label class="check"><input type="checkbox" id="wl-a-claude" name="agents" value="Claude Code"><span>Claude Code</span></label>
-              <label class="check"><input type="checkbox" id="wl-a-codex" name="agents" value="Codex"><span>Codex</span></label>
-              <label class="check"><input type="checkbox" id="wl-a-cursor" name="agents" value="Cursor"><span>Cursor</span></label>
-              <label class="check"><input type="checkbox" id="wl-a-other" name="agents" value="Other"><span>Something else</span></label>
-            </div>
-          </fieldset>
-          <div class="field">
-            <label for="wl-runs">How many run at once, usually? <span class="opt">Optional</span></label>
-            <select id="wl-runs" name="runs">
-              <option value="">Choose</option>
-              <option value="1">One</option>
-              <option value="2-3">Two or three</option>
-              <option value="4+">Four or more</option>
-            </select>
-          </div>
-          <button class="btn btn--wide" id="wl-submit" type="submit">Join the waitlist</button>
-          <p class="wl__status" id="wl-status" role="status" aria-live="polite"></p>
-          <p class="wl__fine">We use your email only to tell you about Detent. <a href="privacy.html">Privacy</a></p>
-        </form>
-
-        <div class="wl__done" id="wl-done" hidden>
-          <p class="wl__check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></p>
-          <h3>One last tap.</h3>
-          <p>Press <b>Submit</b> on the form that just opened in a new tab. Then we'll write to <b id="wl-done-email"></b> when the campaign opens.</p>
-          <p class="wl__fine">Changed your mind? Reply to any Detent email and you're off the list.</p>
-          <button type="button" class="link link--light" id="wl-again">Add another email</button>
+        </fieldset>
+        <div class="field">
+          <label for="wl-runs">How many run at once, usually? <span class="opt">Optional</span></label>
+          <select id="wl-runs" name="runs"><option value="">Choose</option><option value="1">One</option><option value="2-3">Two or three</option><option value="4+">Four or more</option></select>
         </div>
+        <button class="btn btn--wide" id="wl-submit" type="submit">Join the waitlist</button>
+        <p class="wl__status" id="wl-status" role="status" aria-live="polite"></p>
+        <p class="wl__fine">We use your email only to tell you about Detent. <a href="privacy.html">Privacy</a></p>
+      </form>
+      <div class="wl__done" id="wl-done" hidden>
+        <h3>One last tap.</h3>
+        <p>Press <b>Submit</b> on the form that just opened in a new tab. Then we'll write to <b id="wl-done-email"></b> when the campaign opens.</p>
+        <button type="button" class="link" id="wl-again">Add another email</button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============================================================ faq -->
-  <section class="band band--paper faq" id="faq" aria-labelledby="faq-title">
-    <div class="wrap faq__grid">
-      <h2 id="faq-title">Questions</h2>
-      <div class="faq__list">
-        <details>
-          <summary>What happens if Detent is unplugged?</summary>
-          <p>Nothing changes for your agent. If the device or its software isn't running, or nobody answers within 110 seconds, the agent shows its normal approval prompt on screen.</p>
-        </details>
-        <details>
-          <summary>Can an agent approve its own request?</summary>
-          <p>Not for anything that matters. Risky actions and reviews only go ahead after a physical turn and press on the device, and nothing an agent prints or sends can press the button. Everyday steps are let through so your agents keep moving; you can set Detent to ask for those too.</p>
-        </details>
-        <details>
-          <summary>Does anything leave my computer?</summary>
-          <p>Not for individuals. The software runs on your machine, talks to Detent over USB, and only accepts connections from your own computer. There is no account and no cloud service. Companies using Detent for Teams connect computers to their own Detent server, which they can run inside their own network.</p>
-        </details>
-        <details>
-          <summary>Which agents work with it?</summary>
-          <p>Claude Code, Codex, Cursor, GitHub Copilot CLI, Gemini CLI and Devin connect through their own approval hooks with one install command. Anything else, from a script to a git hook, can use <code>detent ask</code>.</p>
-        </details>
-        <details>
-          <summary>Won't this slow my agents down?</summary>
-          <p>No. By default Detent only asks before steps that can't be undone, like a force push, a deploy or a merge into main. Everything else goes straight through. Finished work can wait on Detent for review while the agent moves on.</p>
-        </details>
-        <details>
-          <summary>Can I change what counts as high risk?</summary>
-          <p>Yes. The tiers come from a rules file you can edit: add your own deploy command, or move a command you trust down a tier.</p>
-        </details>
-        <details>
-          <summary>When does it ship?</summary>
-          <p>The working prototype is being built now. A Kickstarter campaign follows once developers have used it daily. Waitlist members hear the date first.</p>
-        </details>
-        <details>
-          <summary>Does Detent help with audits and AI rules?</summary>
-          <p>It keeps the record auditors ask for. Every decision is saved with the person's name, the date and time, and what the decision meant, such as "approved by a person" or "blocked by a team rule". Each line is chained to the one before, so changing or removing one shows up, and the record exports as CSV or JSON. Name, time and meaning are the three details US rules for signed electronic records list (21 CFR Part 11), and holding the button to stop every agent is the kind of "stop" control the EU AI Act describes for human oversight. Detent is one control, not a certificate: whether those rules apply to you, and what else they ask for, depends on your company.</p>
-        </details>
-        <details>
-          <summary>Is the software free?</summary>
-          <p>Yes. The software comes free with every Detent and runs only on your computer: no account, no cloud, nothing sent anywhere. Companies can add Detent for Teams, a monthly plan per developer with company-wide rules, industry rule packs, signed approval records and a server they can run on their own network. A team lead can also approve reviews from a small second unit on their own desk.</p>
-        </details>
-      </div>
-    </div>
-  </section>
 </main>
 
-<footer class="foot band band--ink">
+<footer class="foot">
   <div class="wrap foot__in">
-    <a class="mark mark--light" href="#top" aria-label="Detent, back to top">
-      <svg class="mark__knob" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><line x1="10" y1="3.6" x2="10" y2="7.4"/></svg>
-      <span>detent</span>
-    </a>
-    <p>Designed in Dubai. Planned prices, subject to change before launch.</p>
-    <nav class="foot__nav" aria-label="Footer">
-      <a href="#waitlist">Waitlist</a>
-      <a href="terms.html">Terms</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="security.html">Security</a>
-      <a href="warranty.html">Warranty</a>
-    </nav>
-    <p class="foot__copy">© 2026 Detent</p>
+    <a class="brand" href="#top"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8"/><line x1="10" y1="3.5" x2="10" y2="7.5"/></svg><span>detent</span></a>
+    <nav aria-label="Legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a><a href="warranty.html">Warranty</a></nav>
+    <p>Designed in Dubai. © 2026 Detent.</p>
   </div>
 </footer>
 
-<script src="js/site.js"></script>
+<script src="js/v2.js"></script>
 <script src="js/wind.js"></script>
 <script src="js/waitlist.js"></script>
 </body>
