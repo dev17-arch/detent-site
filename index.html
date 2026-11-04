@@ -68,6 +68,36 @@
   </div>
 </section>
 
+<!-- ================================================================ scroll-locked knob -->
+<section class="lock" id="lock" aria-label="Scroll to wind the Detent knob">
+  <div class="lock__pin">
+    <div class="lock__copy">
+      <p class="lock__step" data-k="0"><span class="lock__n">A risky step arrives</span><b>The agent stops and waits.</b> Everything else keeps running.</p>
+      <p class="lock__step" data-k="1"><span class="lock__n">Keep scrolling</span><b>Wind the knob a full turn.</b> A high-risk step needs all 360 degrees.</p>
+      <p class="lock__step" data-k="2"><span class="lock__n">Then press</span><b>A reflex tap never counts.</b> The button only works once the turn is done.</p>
+      <p class="lock__step" data-k="3"><span class="lock__n">Allowed</span><b>Codex runs it, and it is recorded.</b> Who, what, when, and how.</p>
+      <div class="lock__bar" aria-hidden="true"><i id="lock-bar"></i></div>
+    </div>
+    <div class="lock__stage">
+      <div class="lock__dev" id="lock-dev">
+        <img src="img/top_high_risk.webp" width="1400" height="1010" alt="Detent seen from above: a screen showing git push --force origin main, a large knob, a small knob and an orange button.">
+        <div class="lock__scr" aria-live="polite">
+          <div class="lock__top"><span>CODEX · web-app</span><span class="lock__tier">HIGH RISK</span></div>
+          <div class="lock__cmd">git push --force<br>origin main</div>
+          <div class="lock__why">Rewrites shared history on main</div>
+          <div class="lock__deg"><span id="lock-deg">0</span>°<small>of 360°</small></div>
+          <div class="lock__meter"><i id="lock-meter"></i></div>
+          <div class="lock__hint" id="lock-hint">Wind the big knob a full turn</div>
+          <div class="lock__done" id="lock-done"><b>Allowed</b><span>Codex runs it.</span></div>
+        </div>
+        <svg class="lock__ring" viewBox="0 0 260 260" aria-hidden="true"><circle cx="130" cy="130" r="124" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="5"/><circle id="lock-arc" cx="130" cy="130" r="124" fill="none" stroke="#FF5448" stroke-width="5" stroke-linecap="round" stroke-dasharray="779" stroke-dashoffset="779" transform="rotate(-90 130 130)"/></svg>
+        <div class="lock__knob" id="lock-knob" aria-hidden="true"></div>
+        <div class="lock__press" id="lock-press" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================================================================ story (scroll-driven) -->
 <section class="story" id="story" aria-label="How Detent works">
   <div class="story__grid">
@@ -372,6 +402,7 @@
 
 <script src="js/v2.js"></script>
 <script src="js/wind.js"></script>
+<script src="js/lock.js"></script>
 <script src="js/waitlist.js"></script>
 </body>
 </html>

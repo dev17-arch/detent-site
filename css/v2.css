@@ -429,3 +429,42 @@ h1, h2, h3 { text-wrap: balance; }
   58%, 76% { opacity: .9; background: #7FD1A8; box-shadow: 0 0 18px 4px rgba(127,209,168,.6), 0 0 60px 10px rgba(127,209,168,.3); }
   86%, 100% { opacity: 0; background: #7FD1A8; }
 }
+
+/* ------------------------------------------------------------------ scroll-locked knob: the page holds while scrolling winds the knob */
+.lock { position: relative; height: 340vh; border-top: 1px solid var(--line); }
+.lock__pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); gap: clamp(24px, 4vw, 64px); align-items: center; width: min(1180px, 100% - 2 * var(--gutter)); margin-inline: auto; overflow: hidden; }
+.lock__copy { position: relative; min-height: 270px; }
+.lock__step { position: absolute; inset: 0 0 auto 0; font-size: 18px; color: var(--dim); max-width: 30ch; opacity: 0; transform: translateY(12px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.lock__step.is-on { opacity: 1; transform: none; }
+.lock__step b { display: block; color: var(--text); font-family: var(--display, inherit); font-size: clamp(30px, 3.6vw, 48px); line-height: 1.02; letter-spacing: -.04em; font-weight: 600; margin: 10px 0 14px; }
+.lock__n { font-size: 13px; color: var(--faint); }
+.lock__bar { position: absolute; left: 0; top: 280px; width: 160px; height: 3px; border-radius: 3px; background: var(--line-2); overflow: hidden; }
+.lock__bar i { display: block; height: 100%; width: 0; background: var(--accent); }
+.lock__stage { position: relative; aspect-ratio: 1400 / 1010; width: 118%; margin-left: -9%; }
+.lock__dev { position: absolute; left: 0; top: 0; width: 1400px; height: 1010px; transform-origin: 0 0; }
+.lock__dev img { position: absolute; inset: 0; width: 1400px; height: 1010px; mix-blend-mode: lighten; }
+.lock__scr { position: absolute; left: 330px; top: 346px; width: 390px; height: 300px; border-radius: 8px; background: #070708; padding: 22px 24px; overflow: hidden; font-family: var(--body); }
+.lock__top { display: flex; justify-content: space-between; font: 500 15px var(--mono); color: #8c8c92; }
+.lock__tier { color: #FF5448; border: 1.5px solid #FF5448; border-radius: 99px; padding: 1px 9px; font-size: 13px; }
+.lock__cmd { margin-top: 14px; font: 500 27px/1.25 var(--mono); color: #f2f2f2; }
+.lock__why { margin-top: 8px; font-size: 15px; color: #ff8b80; }
+.lock__deg { margin-top: 10px; font-size: 46px; font-weight: 600; color: #FF5448; letter-spacing: -.03em; }
+.lock__deg small { font-size: 16px; color: #9a9aa0; font-weight: 400; margin-left: 6px; letter-spacing: 0; }
+.lock__meter { margin-top: 10px; height: 6px; border-radius: 9px; background: #222; overflow: hidden; }
+.lock__meter i { display: block; height: 100%; width: 0; background: #FF5448; }
+.lock__hint { position: absolute; left: 24px; bottom: 18px; font-size: 15px; color: #9a9aa0; }
+.lock__done { position: absolute; inset: 0; background: #06110b; display: flex; flex-direction: column; justify-content: center; padding: 0 28px; opacity: 0; transition: opacity .35s var(--ease); }
+.lock__done b { font-size: 40px; color: #7FD1A8; letter-spacing: -.02em; }
+.lock__done span { margin-top: 10px; font: 18px var(--mono); color: #9fd8bb; }
+.lock__knob { position: absolute; left: 862px; top: 316px; width: 228px; height: 228px; border-radius: 50%; background: url(../img/top_high_risk.webp) -862px -316px / 1400px 1010px; will-change: transform; }
+.lock__ring { position: absolute; left: 846px; top: 300px; width: 260px; height: 260px; }
+.lock__press { position: absolute; left: 940px; top: 618px; width: 200px; height: 100px; border-radius: 50px; background: rgba(0,0,0,.4); opacity: 0; transition: opacity .12s; }
+.lock.is-done .lock__ring circle:last-child { stroke: #7FD1A8; }
+@media (max-width: 860px) {
+  .lock__pin { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: 28px; }
+  .lock__stage { order: -1; }
+  .lock__copy { min-height: 190px; }
+  .lock__bar { top: 196px; }
+  .lock__stage { width: 130%; margin-left: -15%; }
+}
+@media (prefers-reduced-motion: reduce) { .lock__step { transition: none; } }
